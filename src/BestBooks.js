@@ -34,16 +34,22 @@ class BestBooks extends React.Component {
   render() {
     console.log(this.state.books);
 
+     
+
     let carouselItems = this.state.books.map(book => (
+      
+      
+      
       <Carousel.Item key={book._id}>
-        {/* <img
-          className="d-block w-100"
-          src={pic.src}
-          alt={pic.alt}
-        /> */}
         <Carousel.Caption>
-          <h3 style={{ backgroundColor: 'teal', borderRadius: '5px', width: 'max-content', margin: 'auto', padding: '5px' }}>Relax with this {book.title}</h3>
+          <h3 style={{ backgroundColor: 'teal', borderRadius: '5px', width: 'max-content', margin: 'auto', padding: '5px' }}>Have you ever read {book.title}?</h3>
+          <h3 style={{ backgroundColor: 'teal', borderRadius: '5px', width: 'max-content', margin: 'auto', padding: '5px' }}>Genre: {book.description}</h3>
         </Carousel.Caption>
+        <img
+          className="d-block w-100"
+          src="https://dummyimage.com/100x100/07B862/07B862"
+          alt="Placeholder"
+        />
       </Carousel.Item>
     ))
 
@@ -57,14 +63,20 @@ class BestBooks extends React.Component {
     return (
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-
+        
+        
+        
+        
         {
-          this.state.books.length > 0 &&
+          this.state.books.length > 0 ? (
           <Container>
             <Carousel>
               {carouselItems}
             </Carousel>
           </Container>
+          ) : (
+            <h3>No Books Found :</h3>
+          )
         }
 
         {/* {
