@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import {Carousel, Container} from 'react-bootstrap';
+import {Carousel, Form, Button, Container} from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -26,6 +27,53 @@ class BestBooks extends React.Component {
   }
 
 
+  handleBookCreate = async(bookInfo) => {
+    console.log('You are inside of handleBookCreate')
+    console.log(bookInfo);
+    try {
+      const response = await axios.post(`${process.env.REACT_APP_SERVER}/books`, bookInfo);
+      const newBook = response.data;
+      this.setState({
+        books: [...this.state.books, newBook],
+      });
+    } catch (error) {
+      console.log('error in book post: ', error.response);
+    }
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.handleBookCreate({
+      title: event.target.formTitle.value,
+      description: event.target.formDescription.value,
+      status: event.target.formStatus.checked
+    })
+  }
+
+  handleDelete = async (bookToDelete) => {
+    try {
+    
+      const response = await axios.delete(`${process.env.REACT_APP_SERVER}/books/${bookToDelete._id}`);
+
+      
+      console.log(response.status);
+
+      
+      const filteredBooks = this.state.books.filter(book => {
+        return book._id !== bookToDelete._id;
+      })
+
+      
+      this.setState({
+        books: filteredBooks
+      })
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+      
+
   componentDidMount() {
     this.getBooks();
   }
@@ -38,8 +86,6 @@ class BestBooks extends React.Component {
 
     let carouselItems = this.state.books.map(book => (
       
-      
-      
       <Carousel.Item key={book._id}>
         <Carousel.Caption>
           <h3 style={{ backgroundColor: 'teal', borderRadius: '5px', width: 'max-content', margin: 'auto', padding: '5px' }}>Have you ever read {book.title}?</h3>
@@ -50,7 +96,13 @@ class BestBooks extends React.Component {
           src="https://dummyimage.com/100x100/07B862/07B862"
           alt="Placeholder"
         />
+         <Button onClick={() => this.handleDelete(book)}>Remove from database?</Button>
       </Carousel.Item>
+
+
+      
+      
+
     ))
 
     // let renderedBooks = this.state.books.map(book => (
@@ -78,6 +130,24 @@ class BestBooks extends React.Component {
             <h3>No Books Found :</h3>
           )
         }
+
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Group className="mb-3" controlId="formTitle">
+            <Form.Label>Title</Form.Label>
+            <Form.Control type="name" placeholder="Enter book title" />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formDescription">
+            <Form.Label>Description</Form.Label>
+            <Form.Control type="name" placeholder="Enter a book description" />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formStatus">
+            <Form.Check type="checkbox" label="Is it in stock?" />
+          </Form.Group>
+          
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
 
         {/* {
           this.state.books.length > 0 && 
