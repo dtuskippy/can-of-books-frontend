@@ -13,7 +13,6 @@ class BestBooks extends React.Component {
     }
   }
 
-  /* TODO: Make a GET request to your API to fetch all the books from the database  */
   getBooks = async() => {
     try {
       let bookData = await axios.get(`${process.env.REACT_APP_SERVER}/books`);
@@ -26,7 +25,6 @@ class BestBooks extends React.Component {
       console.log('we have an error: ', error.response);
     }
   }
-
 
   handleBookCreate = async(bookInfo) => {
     console.log('You are inside of handleBookCreate')
@@ -42,7 +40,6 @@ class BestBooks extends React.Component {
     }
   }
 
-  //handleSubmit needs to go to the bottom of modal
   handleSubmit = (event) => {
     event.preventDefault();
     this.handleBookCreate({
@@ -87,19 +84,6 @@ class BestBooks extends React.Component {
     this.getBooks();
   }
 
-
-  // handleInput = (e) => {
-  //   e.preventDefault();
-  //   this.setState({
-  //     city: e.target.value
-  //   })
-  // }
-  
-    // const [show, setShow] = useState(false);
-  
-    
-  
-
   render() {
     console.log(this.state.books);
   
@@ -119,11 +103,6 @@ class BestBooks extends React.Component {
       </Carousel.Item>
     ))
 
-    // let renderedBooks = this.state.books.map(book => (
-     //   <p key={book._id}>{book.title}</p>
-    // ))
-    /* TODO: render all the books in a Carousel */
-
     return (
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
@@ -139,108 +118,46 @@ class BestBooks extends React.Component {
             <h3>No Books Found :</h3>
           )
         }
-        
-
-
-         
-
-          <>
           
-            <Button variant="primary" onClick={this.handleShow}> 
-              Add a book!
-            </Button>
+        <>
+        <Button variant="primary" onClick={this.handleShow}> 
+          Add a book!
+        </Button>
 
-            <Modal show={this.state.show} onHide={this.handleClose}>
-              <Modal.Header closeButton>
-                <Modal.Title>Add a book!</Modal.Title>
-              </Modal.Header>
-              <Modal.Body>
-                <Form onSubmit={this.handleSubmit}>
-                  <Form.Group className="mb-3" controlId="formTitle">
-                    <Form.Label>Title</Form.Label>
-                    <Form.Control type="name" placeholder="Enter book title" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formDescription">
-                    <Form.Label>Description</Form.Label>
-                    <Form.Control type="name" placeholder="Enter a book description" />
-                  </Form.Group>
-                  <Form.Group className="mb-3" controlId="formStatus">
-                    <Form.Check type="checkbox" label="Is it in stock?" />
-                    </Form.Group>
-                  <Button variant="primary" type="submit">Submit!</Button>
-                </Form>
-              </Modal.Body>
-            </Modal>
-          </>
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add a book!</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Group className="mb-3" controlId="formTitle">
+                <Form.Label>Title</Form.Label>
+                <Form.Control type="name" placeholder="Enter book title" />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formDescription">
+                <Form.Label>Description</Form.Label>
+                <Form.Control type="name" placeholder="Enter a book description" />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formStatus">
+                <Form.Check type="checkbox" label="Is it in stock?" />
+              </Form.Group>
+              <Button variant="primary" type="submit">Submit!</Button>
+          </Form>
+         </Modal.Body>
+        </Modal>
+        </>
+
       </>
     )
   }
 }
+     
+export default BestBooks;
+  
+
                 
         
 
-export default BestBooks;
 
-
-
-
-
-
-
-{/* <Form onSubmit={this.handleSubmit}>
-          <Form.Group className="mb-3" controlId="formTitle">
-            <Form.Label>Title</Form.Label>
-            <Form.Control type="name" placeholder="Enter book title" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formDescription">
-            <Form.Label>Description</Form.Label>
-            <Form.Control type="name" placeholder="Enter a book description" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formStatus">
-            <Form.Check type="checkbox" label="Is it in stock?" />
-          </Form.Group>
-          
-          <Button variant="primary" type="submit">
-            Submit
-          </Button>
-        </Form>
-
-        <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button> */}
-
-      {/* //Create a `BookFormModal` component that contains the form elements required to collect the user input needed for creating a new book. Reveal this modal when the "Add Book" button is clicked, and hide the modal when the modal is closed. */}
-      {/* //........................................... */}
-      {/* 1. Add book button that just exists
-      2. Book button clicked ===> opens model
-      3. Hide model ===> submit */}
-     
- 
-
-             
-
-
-
-
-
-
-
-           
+      
                     
-
-        {/* {
-          this.state.books.length > 0 && 
-          <>
-            console.log("Gizmo is in the thingy jingys")
-            {renderedBooks}
-            
-          </>
-        
-        } */}
-
-
-        {/* {this.state.books.length ? (
-          <p>{books}</p>
-        ) : (
-          <h3>No Books Found :</h3>
-        )} */}
