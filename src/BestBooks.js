@@ -99,6 +99,13 @@ class BestBooks extends React.Component {
     }
 
     this.updateBooks(bookToUpdate);
+    this.handleUpdateClose();
+  }
+
+  handleUpdateClose = () => {
+    this.setState({
+      showUpdateForm: false
+    })
   }
 
   handleClose = () => {
