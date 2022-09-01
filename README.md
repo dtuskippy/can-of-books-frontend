@@ -9,29 +9,101 @@ Books are life-changing. They have the power to enlighten, educate, entertain, h
 
 Web applications essentially all work by managing data related to “resources”. The resources that an app cares about can be just about anything: a product for sale, an uploaded photo, a review, a bit of weather data… whatever it is that gets stored in a database. When the app provides the interface to create, read, update, and delete a resource, we refer to that as a CRUD app. Over the next few labs, you will build an app that has books as a resource.
 
-For today’s assignment, we are READ book data by connecting our front-end React app to a back-end Express server. Our Express server will connect to a Mongo database. We will need to make a “schema” in our back-end code to model how we want our data to look. We will then populate our database with “seed” data—some of our favorite books. When the front end makes a request to our server, our server will query the database and respond with all of the results from the database. Our front end will display these results.
+Primarily, the project entailed working through CRUD / REST / Mongoose / Axios / Express:
 
-## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+    * CRUD: Create / REST: POST / Mongoose: Model.create() / Axios: axios.post() / Express: app.post()
+    * CRUD: Read / REST: GET / Mongoose: Model.find() / Axios: axios.get() / Express: app.get()
+    * CRUD: Update / REST: PUT / Mongoose: Model.findByIdAndUpdate() / Axios: axios.put() / Express: app.put()
+    * CRUD: Delete / REST: DELETE / Mongoos: Model.findByIdAndDelete() / Axios: axios.delete() / Express: app.delete()
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
 
-## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
+Backend: Express Server, Node.js and Mongoose/MondgoDB cloud deployment
+Frontend: primarily React
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+## Can of Books Backend
 
-## Estimates
-Name of feature: _______________________________
-Estimate of time needed to complete: _____
-Start time: _____
-Finish time: _____
-Actual time needed to complete: _____<!-- See below -->
+**Author**: Alan Chelko & Stephen Clemmer
+**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Credit and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
-Time Estimates
-For each of the lab features, make an estimate of the time it will take you to complete the feature, and record your start and finish times for that feature:
+
+    * Stephen Clemmer, Partner
+    * Special thanks to Audrey and Ben 
+  
+## Team Agreement
+Alan Chelko & Stephen Clemmer Team Agreement
+
+### Conflict Resolution
+For any potential conflicts, we plan to work things out on a consensual basis, but assuming a real conflict arises, we would plan to go through a pros and cons scrum session and weigh it from there.  We'll still strive to reach consensus.
+
+### What are the key strengths of each person on the team?
+Alan: some JS experience from earlier this year
+Stephen: Feels more comfortable on the backend than the front end currently. Project management.
+
+### How can you best utilize these strengths in the execution of your project?  
+Generally, we'll tap the strengths of each member, but we do not want to silo anybody by any particular skill or lack of skill. We have decided to have Stephen drive on the backend and Alan drive on the front end
+
+### Knowing that every person in your team needs to understand all aspects of the project, how do you plan to approach the day-to-day work?  
+We will pair program for this project. Stephen driving on the backend, Alan driving on the front end. We will pause as needed to clarify the code. 
 
 
+## Communication Plan
+
+### What hours will you be available to communicate?
+Target same hours as normal CF class hours: 9:00 - 17:00 PST.
+
+### What platforms will you use to communicate (ie. Slack, phone …)?
+Slack, Remo, gmail.
+
+### How often will you take breaks?
+As needed
+
+### What is your Git flow?
+We will ACP at every functional component
+
+#### Who merges PRs?
+Alan will merge front end PRs. Stephen will merge backend PRs.
+
+
+## Estimates
+
+Name of feature: Lab 11 #1 Repository Setup
+Estimate of time needed to complete: 1 hour
+Start time: 1:00 p.m.
+Finish time: 2:00 p.m.
+Actual time needed to complete: 1hour
+
+====================================================================
+Name of feature: Lab 11 #3 Book Component
+Estimate of time needed to complete: 4 hours
+Start time: 3:30 p.m.
+Finish time: 9:00 p.m.
+Actual time needed to complete: 5.5 hours
+
+====================================================================
+Name of feature: Lab 12 #1 Create
+
+Estimate of time needed to complete: 2 hours
+Start time: 2:00 p.m.
+Finish time: 3:30 p.m. 
+Actual time needed to complete: 1.5 hours
+
+====================================================================
+Name of feature: Lab 12 #2 Delete
+
+Estimate of time needed to complete: 2 hours
+Start time: 4:30 p.m.
+Finish time: 6:00 p.m.
+Actual time needed to complete: 1.5 hours
+
+====================================================================
+Name of feature: Lab 13 #1 Update
+Estimate of time needed to complete: 4 hours
+Start time: 2:30 p.m.
+Finish time: 5:30 p.m. 
+Actual time needed to complete: 3 hours 
+
+====================================================================
+
+2:27 AM | Today
