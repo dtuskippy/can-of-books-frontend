@@ -9,7 +9,9 @@ class BestBooks extends React.Component {
     super(props);
     this.state = {
       books: [],
-      show: false
+      activeBook: {},
+      show: false,
+      showUpdateForm: false
     }
   }
 
@@ -48,7 +50,6 @@ class BestBooks extends React.Component {
       status: event.target.formStatus.checked
     })
     this.handleClose();
-    
   }
 
   handleDelete = async (bookToDelete) => {
@@ -67,7 +68,39 @@ class BestBooks extends React.Component {
       console.log(error);
     }
   }
-  
+
+  updateBooks = async(bookToUpdate) => {
+    console.log('updateBooks');
+    console.log(bookToUpdate);
+    try {
+      let url = `${process.env.REACT_APP_SERVER}/books/${bookToUpdate._id}`
+      let updatedBook = await axios.put(url, bookToUpdate);
+      
+      let updatedBookArray = this.state.books.map(existingBook => {
+        return existingBook._id === bookToUpdate._id
+        ? updatedBook.data
+        : existingBook
+      });
+      this.setState({books: updatedBookArray});
+    } catch (error){
+      console.log('error is book post: ', error.response);
+      }
+  }
+
+  handleUpdateSubmit = (event) => {
+    event.preventDefault();
+    console.log('you are in handleUpdateSubmit');
+    let bookToUpdate = {
+      title: event.target.updateTitle.value || this.state.activeBook.title,
+      description: event.target.updateDescription.value || this.state.activeBook.description,
+      status: event.target.updateStatus.checked || this.state.activeBook.status,
+      _id: this.state.activeBook._id,
+      __v: this.state.activeBook.__v
+    }
+
+    this.updateBooks(bookToUpdate);
+  }
+
   handleClose = () => {
     this.setState({
        show: false
@@ -93,15 +126,20 @@ class BestBooks extends React.Component {
         <Carousel.Caption>
           <h3 style={{ backgroundColor: 'teal', borderRadius: '5px', width: 'max-content', margin: 'auto', padding: '5px' }}>Have you ever read {book.title}?</h3>
           <h3 style={{ backgroundColor: 'teal', borderRadius: '5px', width: 'max-content', margin: 'auto', padding: '5px' }}>Genre: {book.description}</h3>
+          <Button key="updateForm" onClick={() => this.setState({ showUpdateForm: true, activeBook: book })}>Update Book</Button>
+          <Button key="deleteBook" onClick={() => this.handleDelete(book)}>Remove from database?</Button>
         </Carousel.Caption>
         <img
           className="d-block w-100"
           src="https://dummyimage.com/100x100/07B862/07B862"
           alt="Placeholder"
         />
-         <Button onClick={() => this.handleDelete(book)}>Remove from database?</Button>
+         
+         
       </Carousel.Item>
     ))
+     
+        
 
     return (
       <>
@@ -146,6 +184,31 @@ class BestBooks extends React.Component {
          </Modal.Body>
         </Modal>
         </>
+
+
+        {
+          this.state.showUpdateForm && 
+        <Container>
+        <Form onSubmit={this.handleUpdateSubmit}>
+          <Form.Group className="mb-3" controlId="updateTitle">
+            <Form.Label>Update Title</Form.Label>
+            <Form.Control type="text" placeholder={this.state.activeBook.title} />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="updateDescription">
+            <Form.Label>Update Description</Form.Label>
+            <Form.Control type="text" placeholder={this.state.activeBook.description} />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="updateStatus">
+            <Form.Check type="checkbox" label="Status" />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Submit
+          </Button>
+        </Form>
+        </Container>
+        }
+
+
 
       </>
     )
